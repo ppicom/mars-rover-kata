@@ -86,6 +86,24 @@ func (s *RoverShould) TestMoveEast() {
 	}
 }
 
+func (s *RoverShould) TestMoveSouth() {
+
+	tests := []struct {
+		commands string
+		position string
+	}{
+		{commands: "RRM", position: "0:9:S"},
+		{commands: "RRMMMM", position: "0:6:S"},
+		{commands: "RRMMMMMM", position: "0:4:S"},
+	}
+
+	for _, tt := range tests {
+		rover := NewRover()
+		newPosition := rover.Execute(tt.commands)
+		s.Equal(tt.position, newPosition)
+	}
+}
+
 func Test(t *testing.T) {
 	suite.Run(t, new(RoverShould))
 }
