@@ -17,7 +17,7 @@ func (g grid) getNextCoordinateFor(coordinate coordinate, direction direction) c
 	nextY := coordinate.y
 
 	if direction == north {
-		nextY++
+		nextY = (coordinate.y + 1) % g.height
 	}
 
 	if direction == east {
