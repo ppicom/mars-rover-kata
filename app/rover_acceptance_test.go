@@ -26,7 +26,7 @@ func (s *RoverShould) TestTurnRight() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -45,7 +45,7 @@ func (s *RoverShould) TestTurnLeft() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -63,7 +63,7 @@ func (s *RoverShould) TestMoveNorth() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -80,7 +80,7 @@ func (s *RoverShould) TestMoveEast() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -98,7 +98,7 @@ func (s *RoverShould) TestMoveSouth() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -115,7 +115,7 @@ func (s *RoverShould) TestMoveWest() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover()
+		rover := NewRover(*newGrid(10, 10))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
