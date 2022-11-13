@@ -138,6 +138,23 @@ func (s *RoverShould) TestWrapFromTopToBottomWhenMovinNorth() {
 	}
 }
 
+func (s *RoverShould) TestWrapFromLeftToRightWhenMovinEast() {
+
+	tests := []struct {
+		commands string
+		position string
+	}{
+		{commands: "RMMMMMMMMMM", position: "0:0:E"},
+		{commands: "RMMMMMMMMMMMMMMM", position: "5:0:E"},
+	}
+
+	for _, tt := range tests {
+		rover := NewRover(*newGrid(10, 10))
+		newPosition := rover.Execute(tt.commands)
+		s.Equal(tt.position, newPosition)
+	}
+}
+
 func Test(t *testing.T) {
 	suite.Run(t, new(RoverShould))
 }
