@@ -22,7 +22,26 @@ func (s *RoverShould) TestTurnRight() {
 		{commands: "R", position: "0:0:E"},
 		{commands: "RR", position: "0:0:S"},
 		{commands: "RRR", position: "0:0:W"},
-		{commands: "RRRR ", position: "0:0:N"},
+		{commands: "RRRR", position: "0:0:N"},
+	}
+
+	for _, tt := range tests {
+		rover := NewRover()
+		newPosition := rover.Execute(tt.commands)
+		s.Equal(tt.position, newPosition)
+	}
+}
+
+func (s *RoverShould) TestTurnLeft() {
+
+	tests := []struct {
+		commands string
+		position string
+	}{
+		{commands: "L", position: "0:0:W"},
+		{commands: "LL", position: "0:0:S"},
+		{commands: "LLL", position: "0:0:E"},
+		{commands: "LLLL", position: "0:0:N"},
 	}
 
 	for _, tt := range tests {
