@@ -1,4 +1,4 @@
-module github.com/ppicom/gdc2022-go
+module github.com/ppicom/mars-rover-kata
 
 go 1.19
 
