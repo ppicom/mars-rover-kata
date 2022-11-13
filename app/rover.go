@@ -39,6 +39,14 @@ func (r *Rover) Execute(commands string) (position string) {
 					r.y--
 				}
 			}
+
+			if r.d == west {
+				if r.x == 0 {
+					r.x = 9
+				} else {
+					r.x--
+				}
+			}
 		}
 	}
 
