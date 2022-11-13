@@ -6,6 +6,7 @@ import (
 
 type Rover struct {
 	d direction
+	y int
 }
 
 func NewRover() *Rover {
@@ -19,12 +20,14 @@ func (r *Rover) Execute(commands string) (position string) {
 		command := fmt.Sprintf("%c", commands[i])
 		if command == "R" {
 			r.d = r.right()
-		} else {
+		} else if command == "L" {
 			r.d = r.left()
+		} else {
+			r.y++
 		}
 	}
 
-	return fmt.Sprintf("0:0:%s", r.d)
+	return fmt.Sprintf("0:%d:%s", r.y, r.d)
 }
 
 func (r *Rover) right() direction {
