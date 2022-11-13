@@ -18,6 +18,7 @@ func NewRover(grid grid) *Rover {
 }
 
 func (r *Rover) Execute(commands string) (position string) {
+	var obstacleString string
 	for i := 0; i < len(commands); i++ {
 		command := fmt.Sprintf("%c", commands[i])
 		if command == "R" {
@@ -25,11 +26,21 @@ func (r *Rover) Execute(commands string) (position string) {
 		} else if command == "L" {
 			r.direction = r.left()
 		} else {
-			r.coordinate = r.grid.getNextCoordinateFor(r.coordinate, r.direction)
+			obstacleString = r.move()
 		}
 	}
 
-	return fmt.Sprintf("%d:%d:%s", r.x(), r.y(), r.direction)
+	return fmt.Sprintf("%s%d:%d:%s", obstacleString, r.x(), r.y(), r.direction)
+}
+
+func (r *Rover) move() string {
+	nextCoordinate := r.grid.getNextCoordinateFor(r.coordinate, r.direction)
+	if nextCoordinate != nil {
+		r.coordinate = *nextCoordinate
+		return ""
+	}
+
+	return "O:"
 }
 
 func (r *Rover) right() direction {

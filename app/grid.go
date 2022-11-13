@@ -1,18 +1,25 @@
 package app
 
 type grid struct {
-	width  int
-	height int
+	width     int
+	height    int
+	obstacles []coordinate
 }
 
-func newGrid(width, height int) *grid {
+const (
+	MAX_HEIGHT = 10
+	MAX_WIDTH  = 10
+)
+
+func newGrid(obstacles []coordinate) *grid {
 	return &grid{
-		width:  width,
-		height: height,
+		width:     MAX_WIDTH,
+		height:    MAX_HEIGHT,
+		obstacles: obstacles,
 	}
 }
 
-func (g grid) getNextCoordinateFor(coordinate coordinate, direction direction) coordinate {
+func (g grid) getNextCoordinateFor(coordinate coordinate, direction direction) *coordinate {
 	nextX := coordinate.x
 	nextY := coordinate.y
 
@@ -40,5 +47,12 @@ func (g grid) getNextCoordinateFor(coordinate coordinate, direction direction) c
 		}
 	}
 
-	return *newCoordinate(nextX, nextY)
+	nextCoodinate := newCoordinate(nextX, nextY)
+	for _, obstacle := range g.obstacles {
+		if obstacle.equals(*nextCoodinate) {
+			return nil
+		}
+	}
+
+	return nextCoodinate
 }

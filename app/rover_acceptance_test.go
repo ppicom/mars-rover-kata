@@ -26,7 +26,7 @@ func (s *RoverShould) TestTurnRight() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -45,7 +45,7 @@ func (s *RoverShould) TestTurnLeft() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -63,7 +63,7 @@ func (s *RoverShould) TestMoveNorth() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -80,7 +80,7 @@ func (s *RoverShould) TestMoveEast() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -98,7 +98,7 @@ func (s *RoverShould) TestMoveSouth() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -115,7 +115,7 @@ func (s *RoverShould) TestMoveWest() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -132,7 +132,7 @@ func (s *RoverShould) TestWrapFromTopToBottomWhenMovinNorth() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}
@@ -149,7 +149,30 @@ func (s *RoverShould) TestWrapFromLeftToRightWhenMovinEast() {
 	}
 
 	for _, tt := range tests {
-		rover := NewRover(*newGrid(10, 10))
+		rover := NewRover(*newGrid(make([]coordinate, 0)))
+		newPosition := rover.Execute(tt.commands)
+		s.Equal(tt.position, newPosition)
+	}
+}
+
+func (s *RoverShould) TestStopAtAnObstacle() {
+
+	tests := []struct {
+		commands string
+		position string
+	}{
+		{commands: "MMMM", position: "O:0:3:N"},
+		{commands: "RMMMM", position: "O:1:0:E"},
+	}
+
+	for _, tt := range tests {
+		obstacles := []coordinate{
+			*newCoordinate(0, 4),
+			*newCoordinate(2, 0),
+		}
+
+		grid := *newGrid(obstacles)
+		rover := NewRover(grid)
 		newPosition := rover.Execute(tt.commands)
 		s.Equal(tt.position, newPosition)
 	}

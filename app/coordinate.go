@@ -11,3 +11,7 @@ func newCoordinate(x, y int) *coordinate {
 		y: y,
 	}
 }
+
+func (c coordinate) equals(other coordinate) bool {
+	return c.x == other.x && c.y == other.y
+}
